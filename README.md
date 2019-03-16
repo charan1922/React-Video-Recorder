@@ -2,7 +2,7 @@
 Video Recorder using React and Redux
 
 ## Deployment Status
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e8019d2e-6eaa-4194-9407-4bc0abb268d8/deploy-status)](https://app.netlify.com/sites/video-recorder/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/380ae031-b97e-4326-93e9-9b5217c4d7d4/deploy-status)](https://app.netlify.com/sites/video-recorder/deploys)
 
 ## Build Setup
 
