@@ -68,7 +68,7 @@ class Step2 extends Component {
                     <CustomButton onClick={this.stopRecording} variant={"contained"} color={"secondary"} text={"stop recording"} />} 
                     <CustomButton onClick={this.startRecording} variant={"contained"} color={"secondary"} text={"redo"} disabled={!this.state.recording} />
                 </div>
-                {this.state.videoURL ? <video src={this.state.videoURL} controls></video> : " "}
+                {this.state.videoURL ? <video src={this.state.videoURL} controls width="320" height="240"></video> : " "}
             </div>
         );
     }
