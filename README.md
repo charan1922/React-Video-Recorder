@@ -1,4 +1,4 @@
-# video-recorder
+# React-Video-Recorder
 Video Recorder using React and Redux
 
 ## Deployment Status
