@@ -72,7 +72,7 @@ class Step1 extends Component {
                 <video className="my-video" onClick={this.startRecording} width="320" height="240" ref={(ref) => { this.myVideo = ref; }} autoPlay muted></video>
                 <div className="btn-sec">
                     {!hasMedia ? <CustomButton onClick={this.startRecording} variant={"contained"} color={"secondary"} text={"start recording"} /> :
-                        <a href={videoURL} download><CustomButton videoURL={videoURL} onClick={this.stopRecording} variant={"contained"} color={"secondary"} text={"stop recording"} disabled={!this.state.hasMedia} /></a>
+                        <CustomButton  onClick={this.stopRecording} variant={"contained"} color={"secondary"} text={"stop recording"} disabled={!this.state.hasMedia} />
                     }
                     <CustomButton onClick={this.redoRecording} variant={"contained"} color={"secondary"} text={"redo"} disabled={!this.state.hasMedia} />
                     {/* <video className="user-video" controls src={videoURL}></video> */}
