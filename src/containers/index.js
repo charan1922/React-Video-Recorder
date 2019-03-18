@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { Step1, Step2, Step3 } from '../components'
+import SimpleAppBar from '../components/AppBar';
 
 
 const tutorialSteps = [
@@ -85,6 +86,7 @@ class TextMobileStepper extends React.Component {
 
         return (
             <div className={classes.root}>
+            <SimpleAppBar/>
                 <Paper square elevation={0} className={classes.header}>
                     <Typography>{tutorialSteps[activeStep].label}</Typography>
                 </Paper>
