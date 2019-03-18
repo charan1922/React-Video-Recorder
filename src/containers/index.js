@@ -65,11 +65,11 @@ class TextMobileStepper extends React.Component {
         switch (activeStep) {
             case 0:
                 return (
-                    <Step1 />
+                    <Step1 handleNext ={this.handleNext}  />
                 );
             case 1:
                 return (
-                    <Step2 />
+                    <Step2 handleNext ={this.handleNext} />
                 );
             default:
                 return (
@@ -88,11 +88,7 @@ class TextMobileStepper extends React.Component {
                 <Paper square elevation={0} className={classes.header}>
                     <Typography>{tutorialSteps[activeStep].label}</Typography>
                 </Paper>
-                {/* <img
-          className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
-        /> */}
+
                 <MobileStepper
                     steps={maxSteps}
                     position="static"

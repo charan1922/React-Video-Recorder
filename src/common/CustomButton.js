@@ -13,18 +13,18 @@ const styles = theme => ({
 
 function CustomButton(props) {
   const { classes } = props;
-  const { variant, color, text , disabled = false , fullWidth=false} = props;
+  const { variant, color, text, disabled = false, fullWidth = false } = props;
   return (
     <div>
-      <Button
-        onClick={props.onClick}
-        disabled={disabled}
-        variant={variant}
-        color={color}
-        fullWidth={fullWidth}
-        className={classes.button}>
-        {text}
-      </Button>
+        <Button
+          onClick={props.onClick}
+          disabled={disabled}
+          variant={variant}
+          color={color}
+          fullWidth={fullWidth}
+          className={classes.button}>
+          {text}
+        </Button>
     </div>
   );
 }

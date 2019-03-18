@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-// import Auth from './Auth';
+import SavedVideos from './SaveVideo';
 
 const reducers = combineReducers({
     routing: routerReducer,
-    // auth: Auth,
-    
-    });
+    SavedVideos
+});
 
 export default reducers;

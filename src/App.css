@@ -48,3 +48,7 @@ margin:0 auto;
   
   /* align-self: stretch; */
 }
+
+a {
+  text-decoration: none;
+}
