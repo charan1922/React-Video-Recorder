@@ -53,7 +53,7 @@ class Step3 extends Component {
             this.state.mediaRecorder.onstop = async (ev) => {
                 let blob = new Blob(this.state.chunks, { 'type': 'video/mp4;' });
                 let videoURL = window.URL.createObjectURL(blob);
-                await this.setState({ mediaRecorder: null, videoURL });
+                await this.setState({ mediaRecorder: null, videoURL , hasMedia: false});
                 await this.props.saveVideo3(videoURL);
                 await this.props.fetchVideos();
             }
