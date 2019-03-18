@@ -28,11 +28,23 @@ video {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.video-container  {
+width: 320px;
+margin:0 auto;
+/* width="502" height="377" */
+}
+
+
+.btn-sec {
+  display: flex;
+  justify-content: space-between;
+}
+
+.send-btn-sec {
+  display: flex;
+  justify-content: center;
+  
+  /* align-self: stretch; */
 }

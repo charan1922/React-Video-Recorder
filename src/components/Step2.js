@@ -1,77 +1,73 @@
 import React, { Component } from 'react';
+import MediaHandler from '../utils/MediaHandler';
 import CustomButton from '../common/CustomButton';
 
-const constraintObj = {
-    audio: true,
-
-    video: {
-        facingMode: "user",
-        width: { min: 640, ideal: 1280, max: 1920 },
-        height: { min: 480, ideal: 720, max: 1080 }
-    }
-};
-
-
 class Step2 extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            chunks: [],
-            mediaStreamObj: {}
-        }
+            hasMedia: false,
+            videoURL: null
+        };
+        this.mediaHandler = new MediaHandler();
     }
 
-    componentDidMount() {
+    initiateRecording = () => {
+        this.mediaHandler.getPermissions()
+            .then((stream) => {
+                try {
+                    if ("srcObject" in this.myVideo) {
+                        this.myVideo.srcObject = stream;
+                    } else { // for old browsers
+                        this.myVideo.src = URL.createObjectURL(stream);
+                    }
+                    this.myVideo.play();
+                    let mediaRecorder = new MediaRecorder(stream);
+                    let chunks = [];
+                    mediaRecorder.ondataavailable = event => chunks.push(event.data);
+                    mediaRecorder.start();
+                    this.setState({ chunks, mediaRecorder })
+                } catch (err) {
+                    console.log(err.name, err.message);
+                }
+            })
     }
 
-    startRecording = async () => {
-        try {
-            let mediaStreamObj = await navigator.mediaDevices.getUserMedia(constraintObj)
-            this.setState({ mediaStreamObj })
-            let video = document.querySelector('video');
-            if ("srcObject" in video) {
-                // video.srcObject = mediaStreamObj;
-            } else {
-                //old version
-                // video.src = window.URL.createObjectURL(mediaStreamObj);
-            }
-            let mediaRecorder = new MediaRecorder(mediaStreamObj);
-            let chunks = [];
-            mediaRecorder.ondataavailable = event => chunks.push(event.data);
-            mediaRecorder.start();
-            this.setState({ chunks, mediaRecorder , recording : true})
-        }
-        catch (err) {
-            console.log(err.name, err.message);
-        }
+    startRecording = () => {
+        this.setState({ hasMedia: true });
+        this.initiateRecording();
     }
 
     stopRecording = () => {
+        // if (this.state.mediaRecorder) {
         this.state.mediaRecorder.stop();
         this.state.mediaRecorder.onstop = (ev) => {
             let blob = new Blob(this.state.chunks, { 'type': 'video/mp4;' });
             let videoURL = window.URL.createObjectURL(blob);
-            this.setState({ videoURL ,  recording : true })
+            this.setState({ videoURL, mediaRecorder: null })
         }
+        // }
     }
 
+    redoRecording = () => {
+        this.setState({ hasMedia: false, videoURL: null, mediaRecorder: null });
+    }
 
     render() {
-
+        const { hasMedia, videoURL } = this.state
         return (
-            <div>
-                <video width="320" height="240" autoplay muted>
-                    <source src={this.state.mediaStreamObj} autoplay muted />
-                </video >
-                <div>
-                   { !this.state.recording  ? <CustomButton onClick={this.startRecording} variant={"contained"} color={"secondary"} text={"start recording"} /> :
-                    <CustomButton onClick={this.stopRecording} variant={"contained"} color={"secondary"} text={"stop recording"} />} 
-                    <CustomButton onClick={this.startRecording} variant={"contained"} color={"secondary"} text={"redo"} disabled={!this.state.recording} />
+            <div className="video-container">
+                <video className="my-video" onClick={this.startRecording} width="320" height="240" ref={(ref) => { this.myVideo = ref; }} autoPlay muted></video>
+                <div className="btn-sec">
+                    {!hasMedia ? <CustomButton onClick={this.startRecording} variant={"contained"} color={"secondary"} text={"start recording"} /> :
+                        <CustomButton onClick={this.stopRecording} variant={"contained"} color={"secondary"} text={"stop recording"} disabled={!this.state.hasMedia} />}
+                    <CustomButton onClick={this.redoRecording} variant={"contained"} color={"secondary"} text={"redo"} disabled={!this.state.hasMedia} />
+                    {/* <video className="user-video" controls src={videoURL} ref={(ref) => { this.userVideo = ref; }}></video> */}
                 </div>
-                {this.state.videoURL ? <video src={this.state.videoURL} controls width="320" height="240"></video> : " "}
             </div>
         );
     }
 }
+
 
 export default Step2;
