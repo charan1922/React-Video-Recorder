@@ -85,9 +85,9 @@ class Step3 extends Component {
                 <div className="send-btn-sec"> <CustomButton onClick={() => { }} variant={"contained"} color={"primary"} text={"send my video"} fullWidth={true}
                     disabled={isBtnDisabled} /></div>
                 <div className="btn-sec">
-                    <a href={video1} download><CustomButton  variant={"contained"} color={"secondary"} text={"Video 1"} disabled={!video1} /></a>
-                    <a href={video2} download><CustomButton  variant={"contained"} color={"secondary"} text={"Video 2"} disabled={!video2} /></a>
-                    <a href={video3} download><CustomButton  variant={"contained"} color={"secondary"} text={"Video 3"} disabled={!video3} /></a>
+                    <a href={video1} download={"video1.mp4"}><CustomButton  variant={"contained"} color={"secondary"} text={"Video 1"} disabled={!video1} /></a>
+                    <a href={video2} download={"video2.mp4"}><CustomButton  variant={"contained"} color={"secondary"} text={"Video 2"} disabled={!video2} /></a>
+                    <a href={video3} download={"video3.mp4"}><CustomButton  variant={"contained"} color={"secondary"} text={"Video 3"} disabled={!video3} /></a>
                 </div>
             </div>
         );
